@@ -1,0 +1,44 @@
+services:
+  phpservice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: phpapp:latest
+    container_name: php-crud-app
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "${phpservicePort}:80"
+    volumes:
+      - ./src:/var/www/html  
+    depends_on:
+      - dbservice
+
+  dbservice:
+    container_name: dbcontainer
+    image: mysql:8.0
+    restart: always
+    environment:
+      Host: ${Host}  
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./db_data:/var/lib/mysql
+      - ./db_init:/docker-entrypoint-initdb.d
+    ports:
+      - "${dbservicePort}:3306"
+
+  phpmyadminservice:
+    container_name: phpmyadmincontainer
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "${phpmyadminservicePort}:80"
+    environment:
+      PMA_HOST: dbservice
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - dbservice

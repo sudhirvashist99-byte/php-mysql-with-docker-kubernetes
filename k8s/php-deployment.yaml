@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpservice
+  labels:
+    app: phpservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpservice
+  template:
+    metadata:
+      labels:
+        app: phpservice
+    spec:
+      containers:
+      - name: phpservice
+        image: sudhirvashist99/phpmysql:latest
+        ports:
+          - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: mysql-config
+          - secretRef:
+              name: mysql-secret
+        volumeMounts:
+          - name: php-src
+            mountPath: /var/www/html
+      volumes:
+        - name: php-src
+          hostPath:
+            path: /run/desktop/mnt/host/d/SudhirDevOps/kubernetes-php-mysql/src # change path accordingly
+            type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpservice
+spec:
+  type: NodePort
+  selector:
+    app: phpservice
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30800

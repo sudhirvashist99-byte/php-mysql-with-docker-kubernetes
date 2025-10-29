@@ -1,0 +1,8 @@
+#installation tips
+
+1. docker login and push the images to docker hub
+2. deploy on kubernetes by kubectl apply -f k8s/  
+
+3. if problem in start kubectl delete all --all 
+4. kubectl get pods
+ 
