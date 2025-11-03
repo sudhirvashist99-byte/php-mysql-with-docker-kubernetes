@@ -4,9 +4,8 @@ FROM php:8.2-apache
 WORKDIR /var/www/html
 
 # Copy the contents of your local 'src' directory into the container's /var/www/html
-#COPY ./src /var/www/html
-# Copy the contents of your local 'src' directory into the container's /var/www/html for killarcoda
-COPY /root/php-mysql-with-docker-kubernetes/src/. /var/www/html/
+COPY ./src/. /var/www/html
+
 # Install required dependencies for mysqli and pdo_mysql
 RUN apt-get update && apt-get install -y \
         default-mysql-client \
