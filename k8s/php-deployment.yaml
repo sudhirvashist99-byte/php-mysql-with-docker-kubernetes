@@ -29,7 +29,9 @@ spec:
             mountPath: /var/www/html
       volumes:
         - name: php-src
-          emptyDir: {}
+          hostPath:
+            path: /root/php-mysql-with-docker-kubernetes/src
+            type: Directory
 ---
 apiVersion: v1
 kind: Service
