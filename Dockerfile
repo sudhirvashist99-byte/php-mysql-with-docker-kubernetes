@@ -5,6 +5,7 @@ WORKDIR /var/www/html
 
 # Copy the contents of your local 'src' directory into the container's /var/www/html
 COPY ./src/. /var/www/html
+RUN ls -la /var/www/html
 
 # Install required dependencies for mysqli and pdo_mysql
 RUN apt-get update && apt-get install -y \
