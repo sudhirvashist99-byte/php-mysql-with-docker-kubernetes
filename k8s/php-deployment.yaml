@@ -27,12 +27,13 @@ spec:
         volumeMounts:
           - name: php-src
             mountPath: /var/www/html
-      volumes:
-        - name: php-src
-          #hostPath:
-            #path: /run/desktop/mnt/host/d/SudhirDevOps/kubernetes-php-mysql/src # change path accordingly
-            #type: Directory
-         emptyDir: {}
+        volumes:
+          - name: php-src
+            #hostPath:
+            #  path: /run/desktop/mnt/host/d/SudhirDevOps/kubernetes-php-mysql/src
+            #  type: Directory
+            emptyDir: {}
+
 ---
 apiVersion: v1
 kind: Service
