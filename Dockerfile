@@ -1,14 +1,17 @@
 FROM php:8.2-apache
 
+# Set the working directory inside the container
+WORKDIR /var/www/html
+
+# Copy the contents of your local 'src' directory into the container's /var/www/html
+COPY ./src /var/www/html
+
 # Install required dependencies for mysqli and pdo_mysql
 RUN apt-get update && apt-get install -y \
         default-mysql-client \
         default-libmysqlclient-dev \
         && docker-php-ext-install mysqli pdo_mysql \
         && docker-php-ext-enable mysqli pdo_mysql
-
-# copy source file into image
-COPY src/ /var/www/html/
 
 # Enable Apache modules
 RUN a2enmod rewrite
