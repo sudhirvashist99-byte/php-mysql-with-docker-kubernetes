@@ -13,26 +13,23 @@ spec:
     metadata:
       labels:
         app: phpservice
-    spec:
-      containers:
-      - name: phpservice
-        image: sudhirvashist99/phpmysql:latest
-        ports:
-          - containerPort: 80
-        envFrom:
-          - configMapRef:
-              name: mysql-config
-          - secretRef:
-              name: mysql-secret
-        volumeMounts:
-          - name: php-src
-            mountPath: /var/www/html
-    volumes:
+spec:
+  containers:
+  - name: phpservice
+    image: sudhirvashist99/phpmysql:latest
+    ports:
+      - containerPort: 80
+    envFrom:
+      - configMapRef:
+          name: mysql-config
+      - secretRef:
+          name: mysql-secret
+    volumeMounts:
       - name: php-src
-        #hostPath:
-        #  path: /run/desktop/mnt/host/d/SudhirDevOps/kubernetes-php-mysql/src
-        #  type: Directory
-        emptyDir: {}
+        mountPath: /var/www/html
+  volumes:   # ✅ this goes alongside "containers", not inside it
+    - name: php-src
+      emptyDir: {}
 
 ---
 apiVersion: v1
