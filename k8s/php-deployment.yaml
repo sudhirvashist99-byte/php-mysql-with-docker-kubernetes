@@ -16,7 +16,7 @@ spec:
     spec:   # ✅ must be indented under template
       containers:
       - name: phpservice
-        image: sudhirvashist99/phpmysql:latest
+        image: sudhirvashist99/phpapp:latest
         imagePullPolicy: Always
         ports:
           - containerPort: 80
