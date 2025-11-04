@@ -17,6 +17,7 @@ spec:
       containers:
       - name: phpservice
         image: sudhirvashist99/phpmysql:latest
+        imagePullPolicy: Always
         ports:
           - containerPort: 80
         envFrom:
