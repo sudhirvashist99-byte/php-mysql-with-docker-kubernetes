@@ -25,14 +25,6 @@ spec:
               name: mysql-config
           - secretRef:
               name: mysql-secret
-        #volumeMounts:
-          #- name: php-src
-            #mountPath: /var/www/html
-      #volumes:
-        #- name: php-src
-          #hostPath:
-            #path: /root/php-mysql-with-docker-kubernetes/src
-            #type: Directory
 ---
 apiVersion: v1
 kind: Service
