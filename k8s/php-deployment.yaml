@@ -13,7 +13,7 @@ spec:
     metadata:
       labels:
         app: phpservice
-    spec:   # ✅ must be indented under template
+    spec:   # ✅ must be indented under
       containers:
       - name: phpservice
         image: sudhirvashist99/phpapp:latest
