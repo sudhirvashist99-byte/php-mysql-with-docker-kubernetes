@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: php-mysql-docker-k8s
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/sudhirvashist99-byte/php-mysql-with-docker-kubernetes.git
+    path: k8s
+    targetRevision: main
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
